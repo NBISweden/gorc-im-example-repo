@@ -1,0 +1,17 @@
+{
+  "modelId": "gorc-im-base",
+  "version": "0.1.0",
+  "id": "gorc-im-ropaa-slice",
+  "label": "GORC Rules of Participation & Access Slice",
+  "nodes": [
+    {
+      "nodeId": "rules-of-participation-and-access"
+    },
+    {
+      "nodeId": "minimal-set-of-rights-and-obligations"
+    },
+    {
+      "nodeId": "minimal-accountability"
+    }
+  ]
+}

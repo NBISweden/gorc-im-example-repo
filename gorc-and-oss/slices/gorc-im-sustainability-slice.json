@@ -1,0 +1,11 @@
+{
+  "modelId": "gorc-im-base",
+  "version": "0.1.0",
+  "id": "gorc-im-sustainability-slice",
+  "label": "GORC Sustainability Slice",
+  "nodes": [
+    {
+      "nodeId": "sustainability"
+    }
+  ]
+}

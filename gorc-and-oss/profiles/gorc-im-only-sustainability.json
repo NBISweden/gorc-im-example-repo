@@ -1,0 +1,132 @@
+{
+  "modelId": "gorc-im-base",
+  "version": "0.0.1",
+  "id": "gorc-im-only-sustainability",
+  "label": "GORC Only Sustainability",
+  "nodes": [
+    {
+      "type": "nothing",
+      "id": "governance-and-leadership"
+    },
+    {
+      "type": "nothing",
+      "id": "rules-of-participation-and-access"
+    },
+    {
+      "type": "nothing",
+      "id": "commons-strategic-planning"
+    },
+    {
+      "type": "nothing",
+      "id": "commons-intent-and-definition"
+    },
+    {
+      "type": "nothing",
+      "id": "governance-of-quality-research"
+    },
+    {
+      "type": "nothing",
+      "id": "internal-commons-policy"
+    },
+    {
+      "type": "nothing",
+      "id": "organizational-structure"
+    },
+    {
+      "type": "nothing",
+      "id": "community-relations"
+    },
+    {
+      "type": "nothing",
+      "id": "development-strategy"
+    },
+    {
+      "type": "nothing",
+      "id": "risk-management"
+    },
+    {
+      "type": "nothing",
+      "id": "policy-advocacy"
+    },
+    {
+      "type": "nothing",
+      "id": "funding-and-resourcing"
+    },
+    {
+      "type": "nothing",
+      "id": "relevant-roadmaps"
+    },
+    {
+      "type": "nothing",
+      "id": "strategic-review"
+    },
+    {
+      "type": "nothing",
+      "id": "strategic-planning"
+    },
+    {
+      "type": "nothing",
+      "id": "performance-metrics"
+    },
+    {
+      "type": "nothing",
+      "id": "organizational-monitoring"
+    },
+    {
+      "type": "nothing",
+      "id": "develop-risk-management"
+    },
+    {
+      "type": "nothing",
+      "id": "implement-risk-management"
+    },
+    {
+      "type": "nothing",
+      "id": "risk-identification"
+    },
+    {
+      "type": "nothing",
+      "id": "financial-requirements"
+    },
+    {
+      "type": "nothing",
+      "id": "added-value"
+    },
+    {
+      "type": "nothing",
+      "id": "business-continuity"
+    },
+    {
+      "type": "nothing",
+      "id": "human-rights"
+    },
+    {
+      "type": "nothing",
+      "id": "technology-planning"
+    },
+    {
+      "type": "nothing",
+      "id": "health-planning"
+    },
+    {
+      "type": "nothing",
+      "id": "environmental-considerations"
+    },
+    {
+      "type": "nothing",
+      "id": "governance-considerations"
+    },
+    {
+      "type": "nothing",
+      "id": "social-considerations"
+    },
+    {
+      "type": "nothing",
+      "id": "minimal-set-of-rights-and-obligations"
+    },
+    {
+      "type": "nothing",
+      "id": "minimal-accountability"
+    }
+  ]
+}

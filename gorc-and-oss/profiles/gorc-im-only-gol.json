@@ -1,0 +1,24 @@
+{
+  "modelId": "gorc-im-base",
+  "version": "0.1.0",
+  "id": "gorc-im-only-gol",
+  "label": "GORC Only Governance & Leadership",
+  "nodes": [
+    {
+      "type": "nothing",
+      "id": "rules-of-participation-and-access"
+    },
+    {
+      "type": "nothing",
+      "id": "sustainability"
+    },
+    {
+      "type": "nothing",
+      "id": "minimal-set-of-rights-and-obligations"
+    },
+    {
+      "type": "nothing",
+      "id": "minimal-accountability"
+    }
+  ]
+}

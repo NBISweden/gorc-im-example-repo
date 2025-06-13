@@ -1,0 +1,92 @@
+{
+  "modelId": "gorc-im-base",
+  "version": "0.1.0",
+  "id": "gorc-im-gol-slice",
+  "label": "GORC Governance & Leadership Slice",
+  "nodes": [
+    {
+      "nodeId": "governance-and-leadership"
+    },
+    {
+      "nodeId": "commons-strategic-planning"
+    },
+    {
+      "nodeId": "commons-intent-and-definition"
+    },
+    {
+      "nodeId": "governance-of-quality-research"
+    },
+    {
+      "nodeId": "internal-commons-policy"
+    },
+    {
+      "nodeId": "organizational-structure"
+    },
+    {
+      "nodeId": "community-relations"
+    },
+    {
+      "nodeId": "development-strategy"
+    },
+    {
+      "nodeId": "risk-management"
+    },
+    {
+      "nodeId": "policy-advocacy"
+    },
+    {
+      "nodeId": "funding-and-resourcing"
+    },
+    {
+      "nodeId": "relevant-roadmaps"
+    },
+    {
+      "nodeId": "strategic-review"
+    },
+    {
+      "nodeId": "strategic-planning"
+    },
+    {
+      "nodeId": "performance-metrics"
+    },
+    {
+      "nodeId": "organizational-monitoring"
+    },
+    {
+      "nodeId": "develop-risk-management"
+    },
+    {
+      "nodeId": "implement-risk-management"
+    },
+    {
+      "nodeId": "risk-identification"
+    },
+    {
+      "nodeId": "financial-requirements"
+    },
+    {
+      "nodeId": "added-value"
+    },
+    {
+      "nodeId": "business-continuity"
+    },
+    {
+      "nodeId": "human-rights"
+    },
+    {
+      "nodeId": "technology-planning"
+    },
+    {
+      "nodeId": "health-planning"
+    },
+    {
+      "nodeId": "environmental-considerations"
+    },
+    {
+      "nodeId": "governance-considerations"
+    },
+    {
+      "nodeId": "social-considerations"
+    }
+  ]
+}
