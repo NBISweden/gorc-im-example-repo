@@ -2,6 +2,7 @@
   "version": "0.1.0",
   "id": "gorc-im-base",
   "label": "GORC Base Model",
+  "updatedAt": "2025-10-09T14:16:27.732Z",
   "nodes": [
     {
       "id": "governance-and-leadership",

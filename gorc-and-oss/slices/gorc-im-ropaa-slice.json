@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "id": "gorc-im-ropaa-slice",
   "label": "GORC Rules of Participation & Access Slice",
+  "updatedAt": "2025-10-09T14:16:27.732Z",
   "nodes": [
     {
       "nodeId": "rules-of-participation-and-access"

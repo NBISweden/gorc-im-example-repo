@@ -23,6 +23,10 @@
         {
             "ref": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/profiles/gorc-im-only-ropaa.json",
             "modelId": "gorc-im-base"
+        },
+        {
+            "ref": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/profiles/oss-dual-license.json",
+            "modelId": "oss-base"
         }
     ],
     "thematicSlices": [

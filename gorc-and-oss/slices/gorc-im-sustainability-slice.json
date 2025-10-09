@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "id": "gorc-im-sustainability-slice",
   "label": "GORC Sustainability Slice",
+  "updatedAt": "2025-10-09T14:16:27.732Z",
   "nodes": [
     {
       "nodeId": "sustainability"
