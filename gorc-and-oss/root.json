@@ -5,6 +5,9 @@
     "url": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/root.json",
     "baseModels": [
         {
+            "ref": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/models/gorc-im-full.json"
+        },
+        {
             "ref": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/models/gorc-im-base.json"
         },
         {
