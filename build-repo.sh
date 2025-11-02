@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -e
+
 python -m venv .venv
 source .venv/bin/activate && python -m pip install -r converter/requirements.txt
 
@@ -8,14 +10,16 @@ URL_ROOT="${URL_ROOT:-https://example.com}"
 NAME="Example repo"
 DESCRIPTION="This is an example repo demonstrating automatic builds to github pages"
 
-mkdir -p dist
+mkdir -p dist/models
+mkdir -p dist/profiles
+mkdir -p dist/slices
+
+echo "Copying raw repo files"
+cp -r repo-data/* dist/
 
 source .venv/bin/activate && \
     python converter/gorc_im_converter.py \
         --config models/gorc-international-model.spec.json
-
-echo "Copying raw repo files"
-cp -r repo-data/* dist/
 
 source .venv/bin/activate && \
     python converter/create_repo.py \
