@@ -18,7 +18,7 @@ def update_icons_in_file(path: str, url_root: str):
                     "icon": (
                         node["icon"]
                         if node["icon"].startswith("http")
-                        else f"{url_root}/{node['icon']}"
+                        else f"{url_root}{node['icon']}"
                     )
                 } if "icon" in node else {})
             }
