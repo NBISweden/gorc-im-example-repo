@@ -4,6 +4,8 @@ import json
 import re
 import itertools
 import datetime
+import argparse
+import os
 
 
 def is_data_sheet(sheet_name):
@@ -165,16 +167,84 @@ def entries_from_sheet(essential_element, sheet):
         }
 
 
+def parse_config(path: str):
+    with open(path, "r") as f:
+        data = json.load(f)
+        basename = f"{data.get("id", id_from_label(os.path.basename(path)))}.json"
+        output = (
+            {"output": os.path.join(os.path.dirname(path), data["output_dir"], basename)}
+            if "output_dir" in data
+            else {}
+        )
+        path = os.path.join(os.path.dirname(path), data["path"])
+        return {
+            **data,
+            **output,
+            "path": path,
+        }
+
+
+def partial_config_parser(id: str, type_func=str):
+    def _config_parser(value: str):
+        return {
+            id: type_func(value)
+        }
+    return _config_parser
+
+
+def validate_config(config: dict):
+    missing_values = [
+        required_value
+        for required_value in [
+            "output",
+            "path",
+            "type",
+            "version",
+            "label",
+            "id"
+        ] if required_value not in config
+    ]
+    if len(missing_values) > 0:
+        raise ValueError(f"Missing value(s) in config: {', '.join(missing_values)}")
+    return config
+
+
+def parse_arguments(argv):
+    parser = argparse.ArgumentParser(
+        prog="gorc-im-converter",
+        description="This script converts files to json models fit for use with the interactive GORC model viewer."
+    )
+    parser.add_argument("--config", type=parse_config)
+    parser.add_argument("--output", type=partial_config_parser("output"))
+    parser.add_argument("--output_dir", type=partial_config_parser("output"))
+    parser.add_argument("--path", type=partial_config_parser("path"))
+    parser.add_argument("--type", type=partial_config_parser("type"))
+    parser.add_argument("--version", type=partial_config_parser("version"))
+    parser.add_argument("--label", type=partial_config_parser("label"))
+    parser.add_argument("--id", type=partial_config_parser("id"))
+
+    args = vars(parser.parse_args(argv))
+    base_config = args["config"]
+    config = dict() if base_config is None else base_config
+    for key, value in args.items():
+        if key != "config" and value is not None:
+            config.update(value)
+    
+    return validate_config(config)
+
+
+def main(argv):
+    config = parse_arguments(argv)
+    print(f"Converting GORC IM using config:")
+    print(json.dumps(config, indent=2))
+    analyze_excel_and_create_json(
+        excel_file=config["path"],
+        json_file=config["output"],
+        version=config["version"],
+        id=config["id"],
+        label=config["label"]
+    )
+
+
 if __name__ == "__main__":
-    excel_file = (
-        sys.argv[1]
-        if len(sys.argv) > 1
-        else "./GORC_International_Model_WG-CommonsModelV1.1.xlsx"
-    )
-    json_file = (
-        sys.argv[2]
-        if len(sys.argv) > 2
-        else "gorc-model-output.json"
-    )
-    print(f"Converting GORC IM Excel to JSON: {excel_file} -> {json_file}")
-    analyze_excel_and_create_json(excel_file, json_file)
+    main(sys.argv[1:])

@@ -1,0 +1,8 @@
+{
+    "type": "excel",
+    "path": "data/GORC_International_Model_WG-CommonsModelV1.1.xlsx",
+    "id": "gorc-im-core",
+    "label": "GORC Base Model",
+    "version": "0.0.1",
+    "output_dir": "../dist/models"
+}

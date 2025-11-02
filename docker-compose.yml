@@ -1,0 +1,9 @@
+services:
+  python:
+    image: python:3.14-trixie
+    user: "${UID:-1000}:${GID:-1000}"
+    working_dir: /opt/build/
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/opt/build

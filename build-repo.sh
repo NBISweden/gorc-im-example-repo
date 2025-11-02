@@ -1,0 +1,31 @@
+#! /bin/bash
+
+python -m venv .venv
+source .venv/bin/activate && python -m pip install -r converter/requirements.txt
+
+ID="example-repo"
+URL_ROOT="${URL_ROOT:-https://example.com}"
+NAME="Example repo"
+DESCRIPTION="This is an example repo demonstrating automatic builds to github pages"
+
+mkdir -p dist
+
+source .venv/bin/activate && \
+    python converter/gorc_im_converter.py \
+        --config models/gorc-international-model.spec.json
+
+echo "Copying raw repo files"
+cp -r repo-data/* dist/
+
+source .venv/bin/activate && \
+    python converter/create_repo.py \
+        --source_dir dist \
+        --url_root "$URL_ROOT" \
+        --id "$ID" \
+        --name "$NAME" \
+        --description "$DESCRIPTION"
+
+source .venv/bin/activate && \
+    python converter/update_icons.py \
+        "$URL_ROOT" \
+        dist/models/*.json dist/profiles/*.json

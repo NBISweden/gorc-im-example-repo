@@ -7,7 +7,7 @@
     {
       "id": "governance-and-leadership",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/groc-icon_governance-and-leadership.svg",
+      "icon": "icons/groc-icon_governance-and-leadership.svg",
       "name": "Governance & Leadership",
       "shortName": "G & L",
       "considerationLevel": "core",
@@ -17,7 +17,7 @@
     {
       "id": "rules-of-participation-and-access",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/groc-icon_rules-of-participation-and-access.svg",
+      "icon": "icons/groc-icon_rules-of-participation-and-access.svg",
       "name": "Rules of Participation & Access",
       "shortName": "RoP & A",
       "considerationLevel": "core",
@@ -26,7 +26,7 @@
     {
       "id": "sustainability",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/groc-icon_sustainability.svg",
+      "icon": "icons/groc-icon_sustainability.svg",
       "name": "Sustainability",
       "shortName": "S",
       "considerationLevel": "core",
