@@ -44,7 +44,7 @@ def repo_from_dir(source_dir: str, url_root: str, id: str, name: str, descriptio
             update_ref(parse_repo_obj(path, include_model_id=True), source_dir, url_root)
             for path in glob.glob(profiles_glob)
         ],
-        "slices": [
+        "thematicSlices": [
             update_ref(parse_repo_obj(path, include_model_id=True), source_dir, url_root)
             for path in glob.glob(slices_glob)
         ],
