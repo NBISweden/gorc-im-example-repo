@@ -22,7 +22,8 @@ def analyze_excel_and_create_json(
     json_file,
     version="0.0.1",
     id="gorc-im-base",
-    label="GORC Base Model"
+    label="GORC Base Model",
+    node_extensions={}
 ):
     """
     Analyzes the Excel workbook, extracts data, and generates a .ts file
@@ -33,7 +34,7 @@ def analyze_excel_and_create_json(
 
     graph_data = {}
     all_entries = list(entries_from_workbook(workbook))
-    tree_data = tree_from_entries(all_entries)
+    tree_data = extend_tree(tree_from_entries(all_entries), node_extensions)
     base_model_package = {
         "version": version,
         "id": id,
@@ -93,6 +94,7 @@ def node_from_entry(entry):
         "shortDescription": entry.get("description", "")
     }
 
+
 def tree_from_entries(entries):
     """
     Should return a flat tree structure usable in the GORC IM tool
@@ -100,6 +102,17 @@ def tree_from_entries(entries):
     return [
         node_from_entry(entry)
         for entry in entries
+    ]
+
+
+def extend_tree(tree_nodes, node_extensions):
+    return [
+        (
+            {**node, **node_extensions[node["id"]]}
+            if node["id"] in node_extensions
+            else node
+        )
+        for node in tree_nodes
     ]
 
 
@@ -242,7 +255,8 @@ def main(argv):
         json_file=config["output"],
         version=config["version"],
         id=config["id"],
-        label=config["label"]
+        label=config["label"],
+        node_extensions=config.get("extensions", {})
     )
 
 

@@ -4,5 +4,37 @@
     "id": "gorc-im-core",
     "label": "GORC Base Model",
     "version": "0.0.1",
-    "output_dir": "../dist/models"
+    "output_dir": "../dist/models",
+    "extensions": {
+        "governance-leadership": {
+            "icon": "icons/groc-icon_governance-and-leadership.svg"
+        },
+        "rules-of-participation-access": {
+            "icon": "icons/groc-icon_rules-of-participation-access.svg"
+        },
+        "sustainability": {
+            "icon": "icons/groc-icon_sustainability.svg"
+        },
+        "engagement": {
+            "icon": "icons/groc-icon_engagement.svg"
+        },
+        "human-capacity": {
+            "icon": "icons/groc-icon_human-capacity.svg"
+        },
+        "interoperability": {
+            "icon": "icons/groc-icon_interoperability.svg"
+        },
+        "standards-conventions": {
+            "icon": "icons/groc-icon_standards-conventions.svg"
+        },
+        "ict-infrastructure": {
+            "icon": "icons/groc-icon_ict-infrastructure.svg"
+        },
+        "services-tools": {
+            "icon": "icons/groc-icon_services-tools.svg"
+        },
+        "research-objects": {
+            "icon": "icons/groc-icon_research-objects.svg"
+        }
+    }
 }
