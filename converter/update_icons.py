@@ -15,11 +15,7 @@ def update_icons_in_file(path: str, url_root: str):
             {
                 **node,
                 **({
-                    "icon": (
-                        node["icon"]
-                        if node["icon"].startswith("http")
-                        else f"{url_root}{node['icon']}"
-                    )
+                    "icon": node["icon"].format(url_root=url_root)
                 } if "icon" in node else {})
             }
             for node in data["nodes"]

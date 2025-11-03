@@ -8,7 +8,7 @@
     {
       "id": "ee1",
       "type": "essential-element",
-      "icon": "icons/compass.png",
+      "icon": "{url_root}/icons/compass.png",
       "shortName": "Governance",
       "name": "Project Governance (Dual-License)",
       "description": "Decision-making and oversight for both open and enterprise editions, ensuring license boundary integrity.",
@@ -70,7 +70,7 @@
     {
       "id": "ee2",
       "type": "essential-element",
-      "icon": "icons/two-guys.png",
+      "icon": "{url_root}/icons/two-guys.png",
       "shortName": "Community",
       "name": "Community Engagement (Dual-License)",
       "description": "How community contributors interact under dual-license conditions, ensuring clarity and inclusiveness.",
@@ -118,7 +118,7 @@
     {
       "id": "ee3",
       "type": "essential-element",
-      "icon": "icons/money-bag.png",
+      "icon": "{url_root}/icons/money-bag.png",
       "shortName": "Sustainability",
       "name": "Project Sustainability (Dual-License)",
       "description": "Ensuring long-term viability through a balanced open-source and enterprise revenue model.",
@@ -175,7 +175,7 @@
     {
       "id": "ee4",
       "type": "essential-element",
-      "icon": "icons/chain-link.png",
+      "icon": "{url_root}/icons/chain-link.png",
       "shortName": "Interop",
       "name": "Interoperability (Dual-License)",
       "description": "Ensures that open and enterprise editions interoperate cleanly and respect open API commitments.",
@@ -219,7 +219,7 @@
     {
       "id": "ee5",
       "type": "essential-element",
-      "icon": "icons/rocket.png",
+      "icon": "{url_root}/icons/rocket.png",
       "shortName": "Adoption",
       "name": "Adoption and Market Reach (Dual-License)",
       "description": "Tracks uptake of both open and enterprise variants to inform business and community health.",

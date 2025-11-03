@@ -182,19 +182,26 @@ def entries_from_sheet(essential_element, sheet):
 
 def parse_config(path: str):
     with open(path, "r") as f:
-        data = json.load(f)
-        basename = f"{data.get("id", id_from_label(os.path.basename(path)))}.json"
-        output = (
-            {"output": os.path.join(os.path.dirname(path), data["output_dir"], basename)}
-            if "output_dir" in data
-            else {}
-        )
-        path = os.path.join(os.path.dirname(path), data["path"])
-        return {
-            **data,
-            **output,
-            "path": path,
-        }
+        config = json.load(f)
+        config["config_dir"] = os.path.dirname(path)
+        return config
+
+
+def post_process_config(config):
+    return {
+        **config,
+        **format_config_value(config, "output"),
+        **format_config_value(config, "path"),
+        **format_config_value(config, "label"),
+    }
+
+
+def format_config_value(config, id):
+    return (
+        {id: config[id].format(**config)}
+        if id in config
+        else {}
+    )
 
 
 def partial_config_parser(id: str, type_func=str):
@@ -229,7 +236,6 @@ def parse_arguments(argv):
     )
     parser.add_argument("--config", type=parse_config)
     parser.add_argument("--output", type=partial_config_parser("output"))
-    parser.add_argument("--output_dir", type=partial_config_parser("output"))
     parser.add_argument("--path", type=partial_config_parser("path"))
     parser.add_argument("--type", type=partial_config_parser("type"))
     parser.add_argument("--version", type=partial_config_parser("version"))
@@ -243,7 +249,7 @@ def parse_arguments(argv):
         if key != "config" and value is not None:
             config.update(value)
     
-    return validate_config(config)
+    return validate_config(post_process_config(config))
 
 
 def main(argv):

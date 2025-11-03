@@ -7,7 +7,7 @@
     {
       "id": "ee1",
       "type": "essential-element",
-      "icon": "icons/compass.png",
+      "icon": "{url_root}/icons/compass.png",
       "shortName": "Governance",
       "name": "Project Governance",
       "description": "Processes and roles that define how decisions are made in the project.",
@@ -70,7 +70,7 @@
     {
       "id": "ee2",
       "type": "essential-element",
-      "icon": "icons/two-guys.png",
+      "icon": "{url_root}/icons/two-guys.png",
       "shortName": "Community",
       "name": "Community Engagement",
       "description": "How contributors, users, and stakeholders engage with the project.",
@@ -124,7 +124,7 @@
     {
       "id": "ee3",
       "type": "essential-element",
-      "icon": "icons/money-bag.png",
+      "icon": "{url_root}/icons/money-bag.png",
       "shortName": "Sustainability",
       "name": "Project Sustainability",
       "description": "Long-term viability including funding, resources, and project health.",
@@ -187,7 +187,7 @@
     {
       "id": "ee4",
       "type": "essential-element",
-      "icon": "icons/chain-link.png",
+      "icon": "{url_root}/icons/chain-link.png",
       "shortName": "Interop",
       "name": "Interoperability",
       "description": "The ability of the project to integrate and function across systems.",
@@ -250,7 +250,7 @@
     {
       "id": "ee5",
       "type": "essential-element",
-      "icon": "icons/rocket.png",
+      "icon": "{url_root}/icons/rocket.png",
       "shortName": "Adoption",
       "name": "User and Market Adoption",
       "description": "How the project is used and adopted in practice.",
