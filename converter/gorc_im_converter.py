@@ -23,7 +23,8 @@ def analyze_excel_and_create_json(
     version="0.0.1",
     id="gorc-im-base",
     label="GORC Base Model",
-    node_extensions={}
+    node_extensions={},
+    columns=None
 ):
     """
     Analyzes the Excel workbook, extracts data, and generates a .ts file
@@ -33,7 +34,7 @@ def analyze_excel_and_create_json(
     workbook = openpyxl.load_workbook(excel_file, read_only=True, data_only=True)
 
     graph_data = {}
-    all_entries = list(entries_from_workbook(workbook))
+    all_entries = list(entries_from_workbook(workbook, columns))
     tree_data = extend_tree(tree_from_entries(all_entries), node_extensions)
     base_model_package = {
         "version": version,
@@ -116,11 +117,11 @@ def extend_tree(tree_nodes, node_extensions):
     ]
 
 
-def entries_from_workbook(workbook):
+def entries_from_workbook(workbook, columns=None):
     for sheet_name in workbook.sheetnames:
         if is_data_sheet(sheet_name):
             sheet = workbook[sheet_name]
-            entries = list(entries_from_sheet(sheet_name, sheet))
+            entries = list(entries_from_sheet(sheet_name, sheet, columns))
 
             for entry in enrich_entries(entries):
                 yield entry
@@ -153,14 +154,14 @@ def enrich_entries(entries):
         }
 
 
-def entries_from_sheet(essential_element, sheet):
+def entries_from_sheet(essential_element, sheet, columns=None):
     yield {
         "essential_element": essential_element,
         "consideration_level": "core",
     }
     for row in sheet.iter_rows(min_row=3):
         cell_values = [cell.value for cell in row]
-        columns = [
+        column_map = list(zip([
             "category",
             "subcategory",
             "attribute",
@@ -169,13 +170,13 @@ def entries_from_sheet(essential_element, sheet):
             "examples",
             "consideration_level",
             "primary_source"
-        ]
+        ], range(8))) if columns is None else list(columns.items())
         yield {
             "essential_element": essential_element,
             **{
-                key: value
-                for key, value in zip(columns, cell_values)
-                if value is not None
+                key: cell_values[index]
+                for key, index in column_map
+                if index is not None and index < len(cell_values) and cell_values[index] is not None
             }
         }
 
@@ -262,7 +263,8 @@ def main(argv):
         version=config["version"],
         id=config["id"],
         label=config["label"],
-        node_extensions=config.get("extensions", {})
+        node_extensions=config.get("extensions", {}),
+        columns=config.get("columns")
     )
 
 

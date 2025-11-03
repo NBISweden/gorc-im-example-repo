@@ -18,8 +18,9 @@ echo "Copying raw repo files"
 cp -r repo-data/* dist/
 
 source .venv/bin/activate && \
-    python converter/gorc_im_converter.py \
-        --config models/gorc-international-model.spec.json
+    for model_file in models/*.spec.json; \
+        do python converter/gorc_im_converter.py --config "$model_file"; \
+    done
 
 source .venv/bin/activate && \
     python converter/create_repo.py \
