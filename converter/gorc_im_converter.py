@@ -160,7 +160,12 @@ def entries_from_sheet(essential_element, sheet, columns=None):
         "consideration_level": "core",
     }
     for row in sheet.iter_rows(min_row=3):
-        cell_values = [cell.value for cell in row]
+        cell_values = [
+            None
+            if cell.value is None
+            else str(cell.value).strip()
+            for cell in row
+        ]
         column_map = list(zip([
             "category",
             "subcategory",
@@ -171,14 +176,15 @@ def entries_from_sheet(essential_element, sheet, columns=None):
             "consideration_level",
             "primary_source"
         ], range(8))) if columns is None else list(columns.items())
-        yield {
-            "essential_element": essential_element,
-            **{
-                key: cell_values[index]
-                for key, index in column_map
-                if index is not None and index < len(cell_values) and cell_values[index] is not None
+        if any((v is not None for v in cell_values)):
+            yield {
+                "essential_element": essential_element,
+                **{
+                    key: cell_values[index]
+                    for key, index in column_map
+                    if index is not None and index < len(cell_values) and cell_values[index] is not None
+                }
             }
-        }
 
 
 def parse_config(path: str):
