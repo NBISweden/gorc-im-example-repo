@@ -8,183 +8,209 @@ import argparse
 import os
 
 
-def is_data_sheet(sheet_name):
-    clean_name = sheet_name.strip().lower()
-    return clean_name not in {
-        "introduction",
-        "glossary",
-        "kpis & metrics",
-    }
+class GORCParser:
+    def __init__(
+        self,
+        columns=None,
+        sheets=None,
+        node_extensions=None
+    ):
+        self.columns = columns
+        self.sheets = (
+            {
+                "\s*introduction\s*": None,
+                "\s*glossary\s*": None,
+                "\s*kpis & metrics\s*": "kpi",
+                ".+": "node",
+            }
+            if sheets is None
+            else sheets
+        )
+        self.node_extensions = node_extensions
 
+    def clean_name(self, name):
+        return sheet_name.strip().lower()
 
-def analyze_excel_and_create_json(
-    excel_file,
-    json_file,
-    version="0.0.1",
-    id="gorc-im-base",
-    label="GORC Base Model",
-    node_extensions={},
-    columns=None
-):
-    """
-    Analyzes the Excel workbook, extracts data, and generates a .ts file
-    suitable for translation to example-models.ts.
-    """
-
-    workbook = openpyxl.load_workbook(excel_file, read_only=True, data_only=True)
-
-    graph_data = {}
-    all_entries = list(entries_from_workbook(workbook, columns))
-    tree_data = extend_tree(tree_from_entries(all_entries), node_extensions)
-    base_model_package = {
-        "version": version,
-        "id": id,
-        "label": label,
-        "updatedAt": datetime.datetime.now().isoformat(),
-        "nodes": tree_data
-    }
-    with open(json_file, "w") as f:
-        f.write(json.dumps(base_model_package, indent=2))
-
-
-def get_keys_of_importance(entry):
-    context_properties = (
-        "essential_element",
-        "category",
-        "subcategory",
-        "attribute",
-        "feature",
-    )
-    for property_key in reversed(context_properties):
-        if property_key in entry:
-            yield property_key
-
-
-def get_node_type(entry):
-    return next(get_keys_of_importance(entry))
-
-
-def id_from_label(label):
-    id = label.lower().strip()
-    id = re.sub(r"[^\w\s-]", "", id)
-    id = re.sub(r"[\s_-]+", "-", id)
-    id = re.sub(r"^-+|-+$", "", id)
-    return id
-
-
-def get_parent_node_id(entry):
-    try:
-        parent_node_type = next(itertools.islice(get_keys_of_importance(entry), 1, None))
-        return id_from_label(entry[parent_node_type])
-    except StopIteration:
+    def get_sheet_type(self, sheet_name):
+        for expression, sheet_type in self.sheets.items():
+            if re.match(expression, sheet_name, re.IGNORECASE):
+                return sheet_type
         return None
 
+    def parse(
+        self,
+        excel_file,
+        version="0.0.1",
+        id="gorc-im-base",
+        label="GORC Base Model",
+    ):
+        """
+        Analyzes the Excel workbook, extracts data, and generates a .ts file
+        suitable for translation to example-models.ts.
+        """
 
-def node_from_entry(entry):
-    node_type = get_node_type(entry)
-    name = entry[node_type]
-    parent_id = get_parent_node_id(entry)
-    return {
-        "id": id_from_label(name),
-        "type": node_type.replace("_", "-"),
-        "name": name,
-        "shortName": name,
-        **({} if parent_id is None else {"parentId": parent_id}),
-        "considerationLevel":entry.get("consideration_level", "core").lower(),
-        "description": entry.get("description", ""),
-        "shortDescription": entry.get("description", "")
-    }
+        workbook = openpyxl.load_workbook(excel_file, read_only=True, data_only=True)
 
-
-def tree_from_entries(entries):
-    """
-    Should return a flat tree structure usable in the GORC IM tool
-    """
-    return [
-        node_from_entry(entry)
-        for entry in entries
-    ]
-
-
-def extend_tree(tree_nodes, node_extensions):
-    return [
-        (
-            {**node, **node_extensions[node["id"]]}
-            if node["id"] in node_extensions
-            else node
-        )
-        for node in tree_nodes
-    ]
-
-
-def entries_from_workbook(workbook, columns=None):
-    for sheet_name in workbook.sheetnames:
-        if is_data_sheet(sheet_name):
-            sheet = workbook[sheet_name]
-            entries = list(entries_from_sheet(sheet_name, sheet, columns))
-
-            for entry in enrich_entries(entries):
-                yield entry
-
-
-def enrich_entries(entries):
-    current_context = {}
-    context_properties = (
-        "essential_element",
-        "category",
-        "subcategory",
-        "attribute",
-        "feature",
-    )
-    for entry in entries:
-        last_key_index = max([
-            index
-            for index, key in enumerate(context_properties)
-            if key in entry
-        ])
-        entry_context = {
-            property_key: entry.get(property_key, current_context.get(property_key))
-            for property_key in context_properties[0:last_key_index + 1]
-            if property_key in entry or property_key in current_context
+        graph_data = {}
+        all_entries = list(self.entries_from_workbook(workbook))
+        tree_data = self.extend_tree(self.tree_from_entries(all_entries), self.node_extensions)
+        base_model_package = {
+            "version": version,
+            "id": id,
+            "label": label,
+            "updatedAt": datetime.datetime.now().isoformat(),
+            "nodes": tree_data
         }
-        current_context = entry_context
-        yield {
-            **entry,
-            **entry_context
-        }
+        return base_model_package
 
 
-def entries_from_sheet(essential_element, sheet, columns=None):
-    yield {
-        "essential_element": essential_element,
-        "consideration_level": "core",
-    }
-    for row in sheet.iter_rows(min_row=3):
-        cell_values = [
-            None
-            if cell.value is None
-            else str(cell.value).strip()
-            for cell in row
-        ]
-        column_map = list(zip([
+    def get_keys_of_importance(self, entry):
+        context_properties = (
+            "essential_element",
             "category",
             "subcategory",
             "attribute",
             "feature",
-            "description",
-            "examples",
-            "consideration_level",
-            "primary_source"
-        ], range(8))) if columns is None else list(columns.items())
-        if any((v is not None for v in cell_values)):
-            yield {
-                "essential_element": essential_element,
-                **{
-                    key: cell_values[index]
-                    for key, index in column_map
-                    if index is not None and index < len(cell_values) and cell_values[index] is not None
-                }
+        )
+        for property_key in reversed(context_properties):
+            if property_key in entry:
+                yield property_key
+
+
+    def get_node_type(self, entry):
+        return next(self.get_keys_of_importance(entry))
+
+
+    def id_from_label(self, label):
+        id = label.lower().strip()
+        id = re.sub(r"[^\w\s-]", "", id)
+        id = re.sub(r"[\s_-]+", "-", id)
+        id = re.sub(r"^-+|-+$", "", id)
+        return id
+
+
+    def get_parent_node_id(self, entry):
+        try:
+            parent_node_type = next(itertools.islice(self.get_keys_of_importance(entry), 1, None))
+            return self.id_from_label(entry[parent_node_type])
+        except StopIteration:
+            return None
+
+
+    def node_from_entry(self, entry):
+        node_type = self.get_node_type(entry)
+        name = entry[node_type]
+        parent_id = self.get_parent_node_id(entry)
+        return {
+            "id": self.id_from_label(name),
+            "type": node_type.replace("_", "-"),
+            "name": name,
+            "shortName": name,
+            **({} if parent_id is None else {"parentId": parent_id}),
+            "considerationLevel":entry.get("consideration_level", "core").lower(),
+            "description": entry.get("description", ""),
+            "shortDescription": entry.get("description", "")
+        }
+
+
+    def tree_from_entries(self, entries):
+        """
+        Should return a flat tree structure usable in the GORC IM tool
+        """
+        return [
+            self.node_from_entry(entry)
+            for entry in entries
+        ]
+
+    def entries_from_workbook(self, workbook):
+        for sheet_name in workbook.sheetnames:
+            sheet_type = self.get_sheet_type(sheet_name)
+            sheet = workbook[sheet_name]
+            print(f"Parsing {sheet_name} as {sheet_type}")
+            match sheet_type:
+                case "node":
+                    entries = self.entries_from_sheet(sheet_name, sheet)
+                    for entry in self.enrich_entries(entries):
+                        yield entry
+                case "kpi":
+                    entries = self.kpi_entries_from_sheet(sheet)
+                    for entry in entries:
+                        yield entry
+                case None:
+                    pass
+                case _:
+                    raise ValueError(f"Incorrectly configured sheet type: '{sheet_type}'")
+
+    def enrich_entries(self, entries):
+        current_context = {}
+        context_properties = (
+            "essential_element",
+            "category",
+            "subcategory",
+            "attribute",
+            "feature",
+        )
+        for entry in entries:
+            last_key_index = max([
+                index
+                for index, key in enumerate(context_properties)
+                if key in entry
+            ])
+            entry_context = {
+                property_key: entry.get(property_key, current_context.get(property_key))
+                for property_key in context_properties[0:last_key_index + 1]
+                if property_key in entry or property_key in current_context
             }
+            current_context = entry_context
+            yield {
+                **entry,
+                **entry_context
+            }
+
+    def entries_from_sheet(self, essential_element, sheet):
+        yield {
+            "essential_element": essential_element,
+            "consideration_level": "core",
+        }
+        for row in sheet.iter_rows(min_row=3):
+            cell_values = [
+                None
+                if cell.value is None
+                else str(cell.value).strip()
+                for cell in row
+            ]
+            column_map = list(zip([
+                "category",
+                "subcategory",
+                "attribute",
+                "feature",
+                "description",
+                "examples",
+                "consideration_level",
+                "primary_source"
+            ], range(8))) if self.columns is None else list(self.columns.items())
+            if any((v is not None for v in cell_values)):
+                yield {
+                    "essential_element": essential_element,
+                    **{
+                        key: cell_values[index]
+                        for key, index in column_map
+                        if index is not None and index < len(cell_values) and cell_values[index] is not None
+                    }
+                }
+
+    def kpi_entries_from_sheet(self, sheet):
+        return tuple()
+
+    def extend_tree(self, tree_nodes, node_extensions):
+        return [
+            (
+                {**node, **node_extensions[node["id"]]}
+                if node["id"] in node_extensions
+                else node
+            )
+            for node in tree_nodes
+        ]
 
 
 def parse_config(path: str):
@@ -263,15 +289,19 @@ def main(argv):
     config = parse_arguments(argv)
     print(f"Converting GORC IM using config:")
     print(json.dumps(config, indent=2))
-    analyze_excel_and_create_json(
+    parser = GORCParser(
+        columns=config.get("columns"),
+        node_extensions=config.get("extensions", {})
+    )
+    base_model_package = parser.parse(
         excel_file=config["path"],
-        json_file=config["output"],
         version=config["version"],
         id=config["id"],
         label=config["label"],
-        node_extensions=config.get("extensions", {}),
-        columns=config.get("columns")
     )
+    json_file = config["output"]
+    with open(json_file, "w") as f:
+        f.write(json.dumps(base_model_package, indent=2))
 
 
 if __name__ == "__main__":
