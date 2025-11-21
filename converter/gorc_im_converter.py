@@ -12,15 +12,17 @@ class GORCParser:
     def __init__(
         self,
         columns=None,
+        kpi_columns=None,
         sheets=None,
         node_extensions=None
     ):
         self.columns = columns
+        self.kpi_columns = kpi_columns
         self.sheets = (
             {
                 "\s*introduction\s*": None,
                 "\s*glossary\s*": None,
-                "\s*kpis & metrics\s*": "kpi",
+                "\s*kpis & metrics\s*": None,
                 ".+": "node",
             }
             if sheets is None
@@ -29,7 +31,7 @@ class GORCParser:
         self.node_extensions = node_extensions
 
     def clean_name(self, name):
-        return sheet_name.strip().lower()
+        return name.strip().lower()
 
     def get_sheet_type(self, sheet_name):
         for expression, sheet_type in self.sheets.items():
@@ -52,14 +54,14 @@ class GORCParser:
         workbook = openpyxl.load_workbook(excel_file, read_only=True, data_only=True)
 
         graph_data = {}
-        all_entries = list(self.entries_from_workbook(workbook))
-        tree_data = self.extend_tree(self.tree_from_entries(all_entries), self.node_extensions)
+        all_nodes = list(self.nodes_from_workbook(workbook))
+        nodes = self.extend_nodes(all_nodes, self.node_extensions)
         base_model_package = {
             "version": version,
             "id": id,
             "label": label,
             "updatedAt": datetime.datetime.now().isoformat(),
-            "nodes": tree_data
+            "nodes": nodes
         }
         return base_model_package
 
@@ -71,6 +73,8 @@ class GORCParser:
             "subcategory",
             "attribute",
             "feature",
+            "kpi",
+            "metric",
         )
         for property_key in reversed(context_properties):
             if property_key in entry:
@@ -112,7 +116,6 @@ class GORCParser:
             "shortDescription": entry.get("description", "")
         }
 
-
     def tree_from_entries(self, entries):
         """
         Should return a flat tree structure usable in the GORC IM tool
@@ -122,7 +125,7 @@ class GORCParser:
             for entry in entries
         ]
 
-    def entries_from_workbook(self, workbook):
+    def nodes_from_workbook(self, workbook):
         for sheet_name in workbook.sheetnames:
             sheet_type = self.get_sheet_type(sheet_name)
             sheet = workbook[sheet_name]
@@ -131,11 +134,11 @@ class GORCParser:
                 case "node":
                     entries = self.entries_from_sheet(sheet_name, sheet)
                     for entry in self.enrich_entries(entries):
-                        yield entry
+                        yield self.node_from_entry(entry)
                 case "kpi":
                     entries = self.kpi_entries_from_sheet(sheet)
                     for entry in entries:
-                        yield entry
+                        yield self.node_from_kpi_entry(entry)
                 case None:
                     pass
                 case _:
@@ -179,16 +182,19 @@ class GORCParser:
                 else str(cell.value).strip()
                 for cell in row
             ]
-            column_map = list(zip([
-                "category",
-                "subcategory",
-                "attribute",
-                "feature",
-                "description",
-                "examples",
-                "consideration_level",
-                "primary_source"
-            ], range(8))) if self.columns is None else list(self.columns.items())
+            column_map = self.create_column_map(
+                [
+                    "category",
+                    "subcategory",
+                    "attribute",
+                    "feature",
+                    "description",
+                    "examples",
+                    "consideration_level",
+                    "primary_source"
+                ],
+                self.columns
+            )
             if any((v is not None for v in cell_values)):
                 yield {
                     "essential_element": essential_element,
@@ -200,9 +206,64 @@ class GORCParser:
                 }
 
     def kpi_entries_from_sheet(self, sheet):
-        return tuple()
+        for row in sheet.iter_rows(min_row=3):
+            cell_values = [
+                None
+                if cell.value is None
+                else str(cell.value).strip()
+                for cell in row
+            ]
+            column_map = self.create_column_map(
+                [
+                    "theme",
+                    "type",
+                    "name",
+                    "description",
+                    "consideration_level",
+                    "source",
+                    "development_stage",
+                    "internal_vs_external_information_needed",
+                    "measurement_of",
+                    "indicator_of",
+                    "parent_id",
+                    "reasoning"
+                ],
+                self.kpi_columns
+            )
+            has_type = cell_values[1] is not None
+            if any((v is not None for v in cell_values)) and has_type:
+                yield {
+                    key: cell_values[index]
+                    for key, index in column_map
+                    if index is not None and index < len(cell_values) and cell_values[index] is not None
+                }
+    
+    def node_from_kpi_entry(self, entry):
+        node_type = {
+            "kpis": "kpi",
+            "metrics": "metric"
+        }[self.id_from_label(entry["type"])]
+        name = entry["name"]
+        parent_id = self.id_from_label(entry["parent_id"])
+        return {
+            "id": self.id_from_label(name),
+            "type": node_type,
+            "name": name,
+            "shortName": name,
+            **({} if parent_id is None else {"parentId": parent_id}),
+            "considerationLevel":entry.get("consideration_level", "core").lower(),
+            "description": entry.get("description", ""),
+            "shortDescription": entry.get("description", "")
+        }
 
-    def extend_tree(self, tree_nodes, node_extensions):
+    def create_column_map(self, column_names, column_dict=None):
+        return (
+            list(zip(column_names, range(len(column_names))))
+            if column_dict is None
+            else list(column_dict.items())
+        )
+
+    def extend_nodes(self, tree_nodes, node_extensions):
         return [
             (
                 {**node, **node_extensions[node["id"]]}
