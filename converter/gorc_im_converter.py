@@ -12,17 +12,17 @@ class GORCParser:
     def __init__(
         self,
         columns=None,
-        kpi_columns=None,
+        metric_columns=None,
         sheets=None,
         node_extensions=None
     ):
         self.columns = columns
-        self.kpi_columns = kpi_columns
+        self.metric_columns = metric_columns
         self.sheets = (
             {
                 "\s*introduction\s*": None,
                 "\s*glossary\s*": None,
-                "\s*kpis & metrics\s*": None,
+                "\s*kpis & metrics\s*": "metric",
                 ".+": "node",
             }
             if sheets is None
@@ -73,8 +73,6 @@ class GORCParser:
             "subcategory",
             "attribute",
             "feature",
-            "kpi",
-            "metric",
         )
         for property_key in reversed(context_properties):
             if property_key in entry:
@@ -110,7 +108,7 @@ class GORCParser:
             "type": node_type.replace("_", "-"),
             "name": name,
             "shortName": name,
-            **({} if parent_id is None else {"parentId": parent_id}),
+            **({} if parent_id is None else {"childOf": parent_id}),
             "considerationLevel":entry.get("consideration_level", "core").lower(),
             "description": entry.get("description", ""),
             "shortDescription": entry.get("description", "")
@@ -135,10 +133,10 @@ class GORCParser:
                     entries = self.entries_from_sheet(sheet_name, sheet)
                     for entry in self.enrich_entries(entries):
                         yield self.node_from_entry(entry)
-                case "kpi":
-                    entries = self.kpi_entries_from_sheet(sheet)
-                    for entry in entries:
-                        yield self.node_from_kpi_entry(entry)
+                case "metric":
+                    entries = self.metric_entries_from_sheet(sheet)
+                    for entry in self.enrich_metrics_entries(entries):
+                        yield self.node_from_metric_entry(entry)
                 case None:
                     pass
                 case _:
@@ -204,8 +202,26 @@ class GORCParser:
                         if index is not None and index < len(cell_values) and cell_values[index] is not None
                     }
                 }
+    
+    def enrich_metrics_entries(self, entries):
+        current_context = {}
+        for entry in entries:
+            current_context = (
+                {"theme": entry["theme"]}
+                if "theme" in entry
+                else {
+                    **current_context,
+                    "type": entry.get("type", current_context.get("type"))
+                }
+            )
+            if "theme" in current_context and "type" in current_context:
+                yield {
+                    **entry,
+                    **current_context
+                }
 
-    def kpi_entries_from_sheet(self, sheet):
+
+    def metric_entries_from_sheet(self, sheet):
         for row in sheet.iter_rows(min_row=3):
             cell_values = [
                 None
@@ -228,29 +244,33 @@ class GORCParser:
                     "parent_id",
                     "reasoning"
                 ],
-                self.kpi_columns
+                self.metric_columns
             )
-            has_type = cell_values[1] is not None
-            if any((v is not None for v in cell_values)) and has_type:
+            if any((v is not None for v in cell_values)):
                 yield {
                     key: cell_values[index]
                     for key, index in column_map
                     if index is not None and index < len(cell_values) and cell_values[index] is not None
                 }
     
-    def node_from_kpi_entry(self, entry):
+    def node_from_metric_entry(self, entry):
         node_type = {
             "kpis": "kpi",
-            "metrics": "metric"
+            "metrics": "metric",
+            "kpi": "kpi",
+            "metric": "metric",
         }[self.id_from_label(entry["type"])]
         name = entry["name"]
-        parent_id = self.id_from_label(entry["parent_id"])
+        hierarchy = entry["parent_id"].split(">")
+        parent_id = self.id_from_label(hierarchy[-1])
         return {
             "id": self.id_from_label(name),
             "type": node_type,
             "name": name,
             "shortName": name,
-            **({} if parent_id is None else {"parentId": parent_id}),
+            "indicatorOf": self.id_from_label(entry["indicator_of"]),
+            "measurementOf": self.id_from_label(entry["measurement_of"]),
+            **({} if parent_id is None else {"childOf": parent_id}),
             "considerationLevel":entry.get("consideration_level", "core").lower(),
             "description": entry.get("description", ""),
             "shortDescription": entry.get("description", "")
