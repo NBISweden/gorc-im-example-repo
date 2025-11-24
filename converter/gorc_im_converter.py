@@ -261,8 +261,6 @@ class GORCParser:
             "metric": "metric",
         }[self.id_from_label(entry["type"])]
         name = entry["name"]
-        hierarchy = entry["child_of"].split(">")
-        child_of = self.id_from_label(hierarchy[-1])
         return {
             "id": self.id_from_label(name),
             "type": node_type,
@@ -270,7 +268,6 @@ class GORCParser:
             "shortName": name,
             "indicatorOf": self.id_from_label(entry["indicator_of"]),
             "measurementOf": self.id_from_label(entry["measurement_of"]),
-            **({} if child_of is None else {"childOf": child_of}),
             "considerationLevel":entry.get("consideration_level", "core").lower(),
             "description": entry.get("description", ""),
             "shortDescription": entry.get("description", "")
