@@ -35,7 +35,7 @@
     {
       "id": "commons-strategic-planning",
       "type": "category",
-      "parentId": "governance-and-leadership",
+      "childOf": "governance-and-leadership",
       "name": "Commons Strategic Planning",
       "shortName": "CSP",
       "considerationLevel": "core",
@@ -44,7 +44,7 @@
     {
       "id": "commons-intent-and-definition",
       "type": "category",
-      "parentId": "governance-and-leadership",
+      "childOf": "governance-and-leadership",
       "name": "Commons intent and definition",
       "shortName": "CID",
       "considerationLevel": "core",
@@ -53,7 +53,7 @@
     {
       "id": "governance-of-quality-research",
       "type": "category",
-      "parentId": "governance-and-leadership",
+      "childOf": "governance-and-leadership",
       "name": "Governance* rules, principles, and enforcement of quality for Research Object*s and Services* & Tools*",
       "shortName": "Governance of quality Research",
       "considerationLevel": "core",
@@ -62,7 +62,7 @@
     {
       "id": "internal-commons-policy",
       "type": "category",
-      "parentId": "governance-and-leadership",
+      "childOf": "governance-and-leadership",
       "name": "Internal Commons* Policy Development, implementation, and review",
       "shortName": "Internal Commons Policy",
       "considerationLevel": "core",
@@ -71,7 +71,7 @@
     {
       "id": "organizational-structure",
       "type": "category",
-      "parentId": "governance-and-leadership",
+      "childOf": "governance-and-leadership",
       "name": "Organizational structures, designs, ways of working, and capability maturity level for the aims and context of the commons",
       "shortName": "Organizational structure",
       "considerationLevel": "core",
@@ -80,7 +80,7 @@
     {
       "id": "community-relations",
       "type": "attribute",
-      "parentId": "commons-strategic-planning",
+      "childOf": "commons-strategic-planning",
       "name": "Development and implementation of community* relations",
       "shortName": "",
       "considerationLevel": "core",
@@ -89,7 +89,7 @@
     {
       "id": "development-strategy",
       "type": "attribute",
-      "parentId": "commons-strategic-planning",
+      "childOf": "commons-strategic-planning",
       "name": "Development of strategy",
       "shortName": "",
       "considerationLevel": "core",
@@ -98,7 +98,7 @@
     {
       "id": "risk-management",
       "type": "subcategory",
-      "parentId": "commons-strategic-planning",
+      "childOf": "commons-strategic-planning",
       "name": "Risk Management Frameworks",
       "shortName": "",
       "considerationLevel": "optional",
@@ -107,7 +107,7 @@
     {
       "id": "policy-advocacy",
       "type": "subcategory",
-      "parentId": "commons-strategic-planning",
+      "childOf": "commons-strategic-planning",
       "name": "Policy advocacy, and recommendations",
       "shortName": "",
       "considerationLevel": "optional",
@@ -116,7 +116,7 @@
     {
       "id": "funding-and-resourcing",
       "type": "subcategory",
-      "parentId": "commons-strategic-planning",
+      "childOf": "commons-strategic-planning",
       "name": "Funding and Resourcing Frameworks",
       "shortName": "",
       "considerationLevel": "core",
@@ -125,7 +125,7 @@
     {
       "id": "relevant-roadmaps",
       "type": "feature",
-      "parentId": "development-strategy",
+      "childOf": "development-strategy",
       "name": "Development of relevant roadmaps",
       "shortName": "",
       "considerationLevel": "core",
@@ -134,7 +134,7 @@
     {
       "id": "strategic-review",
       "type": "feature",
-      "parentId": "development-strategy",
+      "childOf": "development-strategy",
       "name": "Regular strategic review and alignment exercises",
       "shortName": "",
       "considerationLevel": "core",
@@ -143,7 +143,7 @@
     {
       "id": "strategic-planning",
       "type": "feature",
-      "parentId": "development-strategy",
+      "childOf": "development-strategy",
       "name": "Strategic planning influences and approaches",
       "shortName": "",
       "considerationLevel": "core",
@@ -152,7 +152,7 @@
     {
       "id": "performance-metrics",
       "type": "feature",
-      "parentId": "development-strategy",
+      "childOf": "development-strategy",
       "name": "Development of organizational performance and capability metrics*",
       "shortName": "",
       "considerationLevel": "core",
@@ -161,7 +161,7 @@
     {
       "id": "organizational-monitoring",
       "type": "feature",
-      "parentId": "development-strategy",
+      "childOf": "development-strategy",
       "name": "A monitoring organizational design or organizational performance system to gather qualitative and quantitative metrics*",
       "shortName": "",
       "considerationLevel": "core",
@@ -170,7 +170,7 @@
     {
       "id": "develop-risk-management",
       "type": "attribute",
-      "parentId": "risk-management",
+      "childOf": "risk-management",
       "name": "Development of risk management frameworks",
       "shortName": "",
       "considerationLevel": "core",
@@ -179,7 +179,7 @@
     {
       "id": "implement-risk-management",
       "type": "attribute",
-      "parentId": "risk-management",
+      "childOf": "risk-management",
       "name": "Implementation and operationalization of risk management frameworks",
       "shortName": "",
       "considerationLevel": "core",
@@ -188,7 +188,7 @@
     {
       "id": "risk-identification",
       "type": "attribute",
-      "parentId": "risk-management",
+      "childOf": "risk-management",
       "name": "Identification of risks and issues",
       "shortName": "",
       "considerationLevel": "core",
@@ -197,7 +197,7 @@
     {
       "id": "financial-requirements",
       "type": "attribute",
-      "parentId": "funding-and-resourcing",
+      "childOf": "funding-and-resourcing",
       "name": "Identification of the financial and resource requirements for commons* activities",
       "shortName": "",
       "considerationLevel": "core",
@@ -206,7 +206,7 @@
     {
       "id": "added-value",
       "type": "attribute",
-      "parentId": "funding-and-resourcing",
+      "childOf": "funding-and-resourcing",
       "name": "Demonstration of added value",
       "shortName": "",
       "considerationLevel": "core",
@@ -215,7 +215,7 @@
     {
       "id": "business-continuity",
       "type": "feature",
-      "parentId": "develop-risk-management",
+      "childOf": "develop-risk-management",
       "name": "Business continuity planning",
       "shortName": "",
       "considerationLevel": "core",
@@ -224,7 +224,7 @@
     {
       "id": "human-rights",
       "type": "feature",
-      "parentId": "develop-risk-management",
+      "childOf": "develop-risk-management",
       "name": "Human rights risk identification and management",
       "shortName": "",
       "considerationLevel": "optional",
@@ -233,7 +233,7 @@
     {
       "id": "technology-planning",
       "type": "feature",
-      "parentId": "develop-risk-management",
+      "childOf": "develop-risk-management",
       "name": "Technology and information governance* planning",
       "shortName": "",
       "considerationLevel": "core",
@@ -242,7 +242,7 @@
     {
       "id": "health-planning",
       "type": "feature",
-      "parentId": "develop-risk-management",
+      "childOf": "develop-risk-management",
       "name": "Health and safety governance* planning",
       "shortName": "",
       "considerationLevel": "core",
@@ -251,7 +251,7 @@
     {
       "id": "environmental-considerations",
       "type": "feature",
-      "parentId": "financial-requirements",
+      "childOf": "financial-requirements",
       "name": "Environmental considerations",
       "shortName": "",
       "considerationLevel": "core",
@@ -260,7 +260,7 @@
     {
       "id": "governance-considerations",
       "type": "feature",
-      "parentId": "financial-requirements",
+      "childOf": "financial-requirements",
       "name": "Governance* considerations",
       "shortName": "",
       "considerationLevel": "core",
@@ -269,7 +269,7 @@
     {
       "id": "social-considerations",
       "type": "feature",
-      "parentId": "financial-requirements",
+      "childOf": "financial-requirements",
       "name": "Social considerations",
       "shortName": "",
       "considerationLevel": "core",
@@ -278,7 +278,7 @@
     {
       "id": "minimal-set-of-rights-and-obligations",
       "type": "category",
-      "parentId": "rules-of-participation-and-access",
+      "childOf": "rules-of-participation-and-access",
       "name": "A set of policies defining a minimal set of rights and obligations for the commons* community",
       "shortName": "A minimal set of rights and obligations definition",
       "considerationLevel": "core",
@@ -287,7 +287,7 @@
     {
       "id": "minimal-accountability",
       "type": "category",
-      "parentId": "rules-of-participation-and-access",
+      "childOf": "rules-of-participation-and-access",
       "name": "A set of policies defining minimal accountability for the commons* community",
       "shortName": "Minimal accountability defintion",
       "considerationLevel": "core",

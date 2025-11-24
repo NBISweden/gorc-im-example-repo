@@ -16,7 +16,7 @@
     },
     {
       "id": "cat1",
-      "parentId": "ee1",
+      "childOf": "ee1",
       "type": "category",
       "shortName": "Oversight",
       "name": "Governance and Licensing Oversight",
@@ -25,7 +25,7 @@
     },
     {
       "id": "attr1",
-      "parentId": "cat1",
+      "childOf": "cat1",
       "type": "attribute",
       "shortName": "License Policy",
       "name": "License Governance Policy",
@@ -34,7 +34,7 @@
     },
     {
       "id": "feat1",
-      "parentId": "attr1",
+      "childOf": "attr1",
       "type": "feature",
       "shortName": "License Map",
       "name": "License Mapping System",
@@ -43,7 +43,7 @@
     },
     {
       "id": "kpi-lic1",
-      "parentId": "feat1",
+      "childOf": "feat1",
       "type": "kpi",
       "shortName": "Compliance Coverage",
       "name": "License Compliance Coverage",
@@ -52,7 +52,7 @@
     },
     {
       "id": "kpi-lic2",
-      "parentId": "feat1",
+      "childOf": "feat1",
       "type": "kpi",
       "shortName": "Violation Rate",
       "name": "License Violation Incidents",
@@ -78,7 +78,7 @@
     },
     {
       "id": "attr2",
-      "parentId": "ee2",
+      "childOf": "ee2",
       "type": "attribute",
       "shortName": "Transparency",
       "name": "Transparency of Licensing Boundaries",
@@ -87,7 +87,7 @@
     },
     {
       "id": "feat2",
-      "parentId": "attr2",
+      "childOf": "attr2",
       "type": "feature",
       "shortName": "Disclosure",
       "name": "Public License Disclosure",
@@ -96,7 +96,7 @@
     },
     {
       "id": "kpi2",
-      "parentId": "feat2",
+      "childOf": "feat2",
       "type": "kpi",
       "shortName": "Transparency Index",
       "name": "License Transparency Index",
@@ -126,7 +126,7 @@
     },
     {
       "id": "cat2",
-      "parentId": "ee3",
+      "childOf": "ee3",
       "type": "category",
       "shortName": "Monetization",
       "name": "Monetization Strategy",
@@ -135,7 +135,7 @@
     },
     {
       "id": "attr3",
-      "parentId": "cat2",
+      "childOf": "cat2",
       "type": "attribute",
       "shortName": "Revenue Mix",
       "name": "Revenue Composition",
@@ -144,7 +144,7 @@
     },
     {
       "id": "feat3",
-      "parentId": "attr3",
+      "childOf": "attr3",
       "type": "feature",
       "shortName": "Dual Streams",
       "name": "Dual Revenue Streams",
@@ -153,7 +153,7 @@
     },
     {
       "id": "kpi3",
-      "parentId": "feat3",
+      "childOf": "feat3",
       "type": "kpi",
       "shortName": "Open/Enterprise Ratio",
       "name": "Open vs Enterprise Revenue Ratio",
@@ -183,7 +183,7 @@
     },
     {
       "id": "cat3",
-      "parentId": "ee4",
+      "childOf": "ee4",
       "type": "category",
       "shortName": "Interfaces",
       "name": "Open Integration Interfaces",
@@ -192,7 +192,7 @@
     },
     {
       "id": "attr4",
-      "parentId": "cat3",
+      "childOf": "cat3",
       "type": "attribute",
       "shortName": "API Openness",
       "name": "Public API Commitment",
@@ -201,7 +201,7 @@
     },
     {
       "id": "kpi4",
-      "parentId": "attr4",
+      "childOf": "attr4",
       "type": "kpi",
       "shortName": "API Openness",
       "name": "Public API Ratio",
@@ -227,7 +227,7 @@
     },
     {
       "id": "cat4",
-      "parentId": "ee5",
+      "childOf": "ee5",
       "type": "category",
       "shortName": "Usage Segments",
       "name": "Usage Segmentation",
@@ -236,7 +236,7 @@
     },
     {
       "id": "attr5",
-      "parentId": "cat4",
+      "childOf": "cat4",
       "type": "attribute",
       "shortName": "Adoption Mix",
       "name": "Adoption Composition",
@@ -245,7 +245,7 @@
     },
     {
       "id": "kpi5",
-      "parentId": "attr5",
+      "childOf": "attr5",
       "type": "kpi",
       "shortName": "Adoption Split",
       "name": "Community vs Enterprise Adoption Ratio",

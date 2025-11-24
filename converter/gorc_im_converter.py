@@ -102,13 +102,13 @@ class GORCParser:
     def node_from_entry(self, entry):
         node_type = self.get_node_type(entry)
         name = entry[node_type]
-        parent_id = self.get_parent_node_id(entry)
+        child_of = self.get_parent_node_id(entry)
         return {
             "id": self.id_from_label(name),
             "type": node_type.replace("_", "-"),
             "name": name,
             "shortName": name,
-            **({} if parent_id is None else {"childOf": parent_id}),
+            **({} if child_of is None else {"childOf": child_of}),
             "considerationLevel":entry.get("consideration_level", "core").lower(),
             "description": entry.get("description", ""),
             "shortDescription": entry.get("description", "")
@@ -241,7 +241,7 @@ class GORCParser:
                     "internal_vs_external_information_needed",
                     "measurement_of",
                     "indicator_of",
-                    "parent_id",
+                    "child_of",
                     "reasoning"
                 ],
                 self.metric_columns
@@ -261,8 +261,8 @@ class GORCParser:
             "metric": "metric",
         }[self.id_from_label(entry["type"])]
         name = entry["name"]
-        hierarchy = entry["parent_id"].split(">")
-        parent_id = self.id_from_label(hierarchy[-1])
+        hierarchy = entry["child_of"].split(">")
+        child_of = self.id_from_label(hierarchy[-1])
         return {
             "id": self.id_from_label(name),
             "type": node_type,
@@ -270,7 +270,7 @@ class GORCParser:
             "shortName": name,
             "indicatorOf": self.id_from_label(entry["indicator_of"]),
             "measurementOf": self.id_from_label(entry["measurement_of"]),
-            **({} if parent_id is None else {"childOf": parent_id}),
+            **({} if child_of is None else {"childOf": child_of}),
             "considerationLevel":entry.get("consideration_level", "core").lower(),
             "description": entry.get("description", ""),
             "shortDescription": entry.get("description", "")
