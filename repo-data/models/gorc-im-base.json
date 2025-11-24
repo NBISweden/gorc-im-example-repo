@@ -1,13 +1,13 @@
 {
   "version": "0.1.0",
   "id": "gorc-im-base",
-  "label": "GORC Base Model (Test)",
-  "updatedAt": "2025-10-09T14:16:27.732Z",
+  "label": "GORC Base Model",
+  "updatedAt": "2025-11-24T13:29:30.153Z",
   "nodes": [
     {
       "id": "governance-and-leadership",
       "type": "essential-element",
-      "icon": "{url_root}/icons/groc-icon_governance-and-leadership.svg",
+      "icon": "{url_root}/icons/gorc-icon_governance-and-leadership.svg",
       "name": "Governance & Leadership",
       "shortName": "G & L",
       "considerationLevel": "core",
@@ -17,7 +17,7 @@
     {
       "id": "rules-of-participation-and-access",
       "type": "essential-element",
-      "icon": "{url_root}/icons/groc-icon_rules-of-participation-and-access.svg",
+      "icon": "{url_root}/icons/gorc-icon_rules-of-participation-and-access.svg",
       "name": "Rules of Participation & Access",
       "shortName": "RoP & A",
       "considerationLevel": "core",
@@ -26,7 +26,7 @@
     {
       "id": "sustainability",
       "type": "essential-element",
-      "icon": "{url_root}/icons/groc-icon_sustainability.svg",
+      "icon": "{url_root}/icons/gorc-icon_sustainability.svg",
       "name": "Sustainability",
       "shortName": "S",
       "considerationLevel": "core",
