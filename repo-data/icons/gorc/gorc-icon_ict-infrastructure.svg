@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_2"
+   viewBox="0 0 150 129.9"
+   version="1.1"
+   sodipodi:docname="gorc-icon_ict-infrastructure.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview21"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="8.1966667"
+     inkscape:cx="83.326555"
+     inkscape:cy="72.224481"
+     inkscape:window-width="2560"
+     inkscape:window-height="2811"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_2" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">.cls-1,.cls-2{letter-spacing:-.02em;}.cls-3{letter-spacing:-.06em;}.cls-3,.cls-2,.cls-4{fill:#fff;font-family:ArialMT, Arial;font-size:8.25px;isolation:isolate;}.cls-5,.cls-6,.cls-7,.cls-8{stroke:#fff;stroke-miterlimit:10;stroke-width:2px;}.cls-5,.cls-7{fill:none;}.cls-9{fill:#f1f2f2;}.cls-6,.cls-10,.cls-8{fill:#262262;}.cls-6,.cls-7{stroke-linecap:round;}.cls-11{fill:#1c75bc;}</style>
+  </defs>
+  <rect
+     style="fill:#1c75bc;fill-opacity:1"
+     id="rect21"
+     width="150"
+     height="129.89999"
+     x="0"
+     y="0" />
+  <g
+     id="g13"
+     transform="translate(0,10)">
+    <rect
+       class="cls-7"
+       x="86.599998"
+       y="72.800003"
+       width="36.400002"
+       height="9.1999998"
+       id="rect10" />
+    <rect
+       class="cls-7"
+       x="86.599998"
+       y="63.599998"
+       width="36.400002"
+       height="9.1999998"
+       id="rect11" />
+    <line
+       class="cls-7"
+       x1="90.5"
+       y1="68.199997"
+       x2="93.800003"
+       y2="68.199997"
+       id="line11" />
+    <rect
+       class="cls-6"
+       x="86.599998"
+       y="82.099998"
+       width="36.400002"
+       height="9.1999998"
+       id="rect12" />
+    <line
+       class="cls-7"
+       x1="90.5"
+       y1="86.699997"
+       x2="93.800003"
+       y2="86.699997"
+       id="line12" />
+    <line
+       class="cls-7"
+       x1="90.5"
+       y1="77.400002"
+       x2="93.800003"
+       y2="77.400002"
+       id="line13" />
+  </g>
+  <circle
+     class="cls-10"
+     cx="49.200001"
+     cy="84.400002"
+     r="9.5"
+     id="circle13" />
+  <circle
+     class="cls-5"
+     cx="64.199997"
+     cy="99.699997"
+     r="4.3000002"
+     id="circle14" />
+  <circle
+     class="cls-5"
+     cx="66.400002"
+     cy="68.199997"
+     r="4.3000002"
+     id="circle15" />
+  <circle
+     class="cls-9"
+     cx="28.5"
+     cy="89.5"
+     r="5.4000001"
+     id="circle16" />
+  <line
+     class="cls-7"
+     x1="63.299999"
+     y1="71.199997"
+     x2="56.299999"
+     y2="78.199997"
+     id="line16" />
+  <line
+     class="cls-7"
+     x1="61.099998"
+     y1="96.699997"
+     x2="55.700001"
+     y2="91.300003"
+     id="line17" />
+  <line
+     class="cls-7"
+     x1="39.700001"
+     y1="86.5"
+     x2="33.099998"
+     y2="88.400002"
+     id="line18" />
+  <g
+     id="g20"
+     transform="translate(0,10)">
+    <ellipse
+       class="cls-8"
+       cx="77.699997"
+       cy="14.9"
+       rx="22.1"
+       ry="3"
+       id="ellipse18" />
+    <path
+       class="cls-5"
+       d="m 99.8,24.4 c 0,1.6 -9.9,3 -22.1,3 -12.2,0 -22.1,-1.3 -22.1,-3"
+       id="path18" />
+    <path
+       class="cls-5"
+       d="m 55.7,34 c 0,1.6 9.9,3.7 22.1,3.7 12.2,0 22.1,-2.1 22.1,-3.7"
+       id="path19" />
+    <path
+       class="cls-5"
+       d="m 55.7,14.9 v 28.7 c 0,1.6 9.9,3.7 22.1,3.7 12.2,0 22.1,-2.1 22.1,-3.7 V 14.9"
+       id="path20" />
+  </g>
+  <circle
+     class="cls-5"
+     cx="34.099998"
+     cy="72.599998"
+     r="2.3"
+     id="circle20" />
+  <line
+     class="cls-7"
+     x1="36.200001"
+     y1="73.900002"
+     x2="42.299999"
+     y2="78"
+     id="line20" />
+  <line
+     class="cls-7"
+     x1="67.599998"
+     y1="82.699997"
+     x2="58.5"
+     y2="82.699997"
+     id="line21" />
+  <circle
+     class="cls-10"
+     cx="67.599998"
+     cy="82.699997"
+     r="2.8"
+     id="circle21" />
+</svg>

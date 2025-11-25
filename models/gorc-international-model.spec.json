@@ -7,34 +7,34 @@
     "output": "{config_dir}/../dist/models/{id}.json",
     "extensions": {
         "governance-leadership": {
-            "icon": "{url_root}/icons/gorc-icon_governance-and-leadership.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_governance-and-leadership.svg"
         },
         "rules-of-participation-access": {
-            "icon": "{url_root}/icons/gorc-icon_rules-of-participation-access.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_rules-of-participation-access.svg"
         },
         "sustainability": {
-            "icon": "{url_root}/icons/gorc-icon_sustainability.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_sustainability.svg"
         },
         "engagement": {
-            "icon": "{url_root}/icons/gorc-icon_engagement.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_engagement.svg"
         },
         "human-capacity": {
-            "icon": "{url_root}/icons/gorc-icon_human-capacity.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_human-capacity.svg"
         },
         "interoperability": {
-            "icon": "{url_root}/icons/gorc-icon_interoperability.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_interoperability.svg"
         },
         "standards-conventions": {
-            "icon": "{url_root}/icons/gorc-icon_standards-conventions.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_standards-conventions.svg"
         },
         "ict-infrastructure": {
-            "icon": "{url_root}/icons/gorc-icon_ict-infrastructure.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_ict-infrastructure.svg"
         },
         "services-tools": {
-            "icon": "{url_root}/icons/gorc-icon_services-tools.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_services-tools.svg"
         },
         "research-objects": {
-            "icon": "{url_root}/icons/gorc-icon_research-objects.svg"
+            "icon": "{url_root}/icons/gorc/gorc-icon_research-objects.svg"
         }
     }
 }
