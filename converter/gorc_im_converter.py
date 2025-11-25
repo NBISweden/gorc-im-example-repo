@@ -291,6 +291,61 @@ class GORCParser:
         ]
 
 
+def get_root_node(node, node_map):
+    if "childOf" in node:
+        return get_root_node(
+            node_map[node["childOf"]],
+            node_map
+        )
+    else:
+        return node
+
+
+def generate_basic_slices(model):
+    nodes = model["nodes"]
+    model_id = model["id"]
+
+    node_map = {
+        node["id"]: node
+        for node in nodes
+    }
+
+    slice_map = dict()
+    for node in nodes:
+        if node["type"] not in {"kpi", "metric"}:
+            root = get_root_node(node, node_map)
+            slice_nodes, id_set = slice_map.get(root["id"], ([], set()))
+            slice_nodes.append(node)
+            id_set.add(node["id"])
+            slice_map[root["id"]] = (slice_nodes, id_set)
+
+    kpi_nodes = [
+        node
+        for node in nodes
+        if node["type"] in {"kpi", "metric"}
+    ]
+    
+    return [
+        {
+            "updatedAt": datetime.datetime.now().isoformat(),
+            "modelId": model["id"],
+            "version": model["version"],
+            "id": f"{model['id']}-slice-{root_id}",
+            "label": f"{node_map[root_id]['name']} Slice",
+            "nodes": [
+                {
+                    "nodeId": node["id"]
+                }
+                for node in [
+                    *slice_nodes,
+                    *[n for n in kpi_nodes if n["measurementOf"] in slice_ids or n["indicatorOf"] in slice_ids]
+                ]
+            ]
+        }
+        for root_id, (slice_nodes, slice_ids) in slice_map.items()
+    ]
+
+
 def parse_config(path: str):
     with open(path, "r") as f:
         config = json.load(f)
@@ -347,6 +402,7 @@ def parse_arguments(argv):
     )
     parser.add_argument("--config", type=parse_config)
     parser.add_argument("--output", type=partial_config_parser("output"))
+    parser.add_argument("--sliceoutput", type=partial_config_parser("sliceoutput"))
     parser.add_argument("--path", type=partial_config_parser("path"))
     parser.add_argument("--type", type=partial_config_parser("type"))
     parser.add_argument("--version", type=partial_config_parser("version"))
@@ -379,7 +435,21 @@ def main(argv):
     )
     json_file = config["output"]
     with open(json_file, "w") as f:
+        print(f"Writing model: {json_file}")
         f.write(json.dumps(base_model_package, indent=2))
+    
+    slice_output = config.get("sliceoutput")
+
+    if slice_output:
+        slices = generate_basic_slices(base_model_package)
+        for model_slice in slices:
+            slice_file_path = slice_output.format(
+                config_dir=config["config_dir"],
+                slice_id=model_slice["id"]
+            )
+            print(f"Writing slice: {slice_file_path}")
+            with open(slice_file_path, "w") as f:
+                f.write(json.dumps(model_slice, indent=2))
 
 
 if __name__ == "__main__":

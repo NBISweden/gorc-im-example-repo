@@ -5,6 +5,7 @@
     "label": "GORC Base Model",
     "version": "0.0.1",
     "output": "{config_dir}/../dist/models/{id}.json",
+    "sliceoutput": "{config_dir}/../dist/slices/{slice_id}.json",
     "extensions": {
         "governance-leadership": {
             "icon": "{url_root}/icons/gorc/gorc-icon_governance-and-leadership.svg"
