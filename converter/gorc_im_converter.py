@@ -220,7 +220,6 @@ class GORCParser:
                     **current_context
                 }
 
-
     def metric_entries_from_sheet(self, sheet):
         for row in sheet.iter_rows(min_row=3):
             cell_values = [
@@ -266,8 +265,8 @@ class GORCParser:
             "type": node_type,
             "name": name,
             "shortName": name,
-            "indicatorOf": self.id_from_label(entry["indicator_of"]),
-            "measurementOf": self.id_from_label(entry["measurement_of"]),
+            "indicatorOf": {self.id_from_label(ref) for ref in entry["indicator_of"].split("/")},
+            "measurementOf": {self.id_from_label(ref) for ref in entry["measurement_of"].split("/")},
             "considerationLevel":entry.get("consideration_level", "core").lower(),
             "description": entry.get("description", ""),
             "shortDescription": entry.get("description", "")
@@ -419,6 +418,16 @@ def parse_arguments(argv):
     return validate_config(post_process_config(config))
 
 
+def json_serialize_defaults(value):
+    if isinstance(value, set):
+        return list(value)
+    raise TypeError(f"No default serializer for {value_type.__name__}")
+
+
+def to_json(data):
+    return json.dumps(data, indent=2, default=json_serialize_defaults)
+
+
 def main(argv):
     config = parse_arguments(argv)
     print(f"Converting GORC IM using config:")
@@ -436,7 +445,7 @@ def main(argv):
     json_file = config["output"]
     with open(json_file, "w") as f:
         print(f"Writing model: {json_file}")
-        f.write(json.dumps(base_model_package, indent=2))
+        f.write(to_json(base_model_package))
     
     slice_output = config.get("sliceoutput")
 
@@ -449,7 +458,7 @@ def main(argv):
             )
             print(f"Writing slice: {slice_file_path}")
             with open(slice_file_path, "w") as f:
-                f.write(json.dumps(model_slice, indent=2))
+                f.write(to_json(model_slice))
 
 
 if __name__ == "__main__":
