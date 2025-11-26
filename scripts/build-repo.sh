@@ -12,9 +12,9 @@ mkdir -p dist/profiles
 mkdir -p dist/slices
 
 echo "Copying raw repo files"
-cp -r repo-data/* dist/
+cp -r data/json/* dist/
 
-for model_file in models/*.spec.json; \
+for model_file in data/models/*.spec.json; \
     do python converter/gorc_im_converter.py --config "$model_file"; \
 done
 

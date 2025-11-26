@@ -4,8 +4,8 @@
     "id": "gorc-im-core",
     "label": "GORC Base Model",
     "version": "0.0.1",
-    "output": "{config_dir}/../dist/models/{id}.json",
-    "sliceoutput": "{config_dir}/../dist/slices/{slice_id}.json",
+    "output": "{config_dir}/../../dist/models/{id}.json",
+    "sliceoutput": "{config_dir}/../../dist/slices/{slice_id}.json",
     "id_mapping": {
         "ict": "ict-infrastructure",
         "governance-management": "governance-leadership"
