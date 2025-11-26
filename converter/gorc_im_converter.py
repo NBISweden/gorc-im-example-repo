@@ -14,7 +14,8 @@ class GORCParser:
         columns=None,
         metric_columns=None,
         sheets=None,
-        node_extensions=None
+        node_extensions=None,
+        id_mapping=None
     ):
         self.columns = columns
         self.metric_columns = metric_columns
@@ -28,7 +29,16 @@ class GORCParser:
             if sheets is None
             else sheets
         )
-        self.node_extensions = node_extensions
+        self.id_mapping = (
+            dict()
+            if id_mapping is None
+            else id_mapping
+        )
+        self.node_extensions = (
+            dict()
+            if node_extensions is None
+            else node_extensions
+        )
 
     def clean_name(self, name):
         return name.strip().lower()
@@ -88,7 +98,7 @@ class GORCParser:
         id = re.sub(r"[^\w\s-]", "", id)
         id = re.sub(r"[\s_-]+", "-", id)
         id = re.sub(r"^-+|-+$", "", id)
-        return id
+        return self.id_mapping.get(id, id)
 
 
     def get_parent_node_id(self, entry):
@@ -434,7 +444,8 @@ def main(argv):
     print(json.dumps(config, indent=2))
     parser = GORCParser(
         columns=config.get("columns"),
-        node_extensions=config.get("extensions", {})
+        node_extensions=config.get("extensions"),
+        id_mapping=config.get("id_mapping"),
     )
     base_model_package = parser.parse(
         excel_file=config["path"],
