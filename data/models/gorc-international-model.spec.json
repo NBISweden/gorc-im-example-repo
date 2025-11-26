@@ -3,7 +3,7 @@
     "path": "{config_dir}/data/GORC_International_Model_WG-CommonsModelV1.1.xlsx",
     "id": "gorc-im-core",
     "label": "GORC Base Model",
-    "version": "0.0.1",
+    "version": "1.1.0b",
     "output": "{config_dir}/../../dist/models/{id}.json",
     "sliceoutput": "{config_dir}/../../dist/slices/{slice_id}.json",
     "id_mapping": {
