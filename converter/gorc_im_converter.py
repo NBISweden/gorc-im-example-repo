@@ -310,7 +310,58 @@ def get_root_node(node, node_map):
         return node
 
 
-def generate_basic_slices(model):
+def get_node_chain(node, node_map):
+    if "childOf" in node:
+        next_node = node_map[node["childOf"]]
+        return [
+            *get_node_chain(next_node, node_map),
+            node
+        ]
+    else:
+        return [node]
+
+
+def generate_consideration_level_slices(model):
+    nodes = model["nodes"]
+    node_map = {
+        node["id"]: node
+        for node in nodes
+    }
+    consideration_levels = {
+        node["considerationLevel"]
+        for node in nodes
+    }
+    
+    for consideration_level in consideration_levels:
+        base_nodes = [
+            node
+            for node in nodes
+            if node["considerationLevel"] == consideration_level
+        ]
+        slice_node_ids = set()
+        for node in base_nodes:
+            node_chain = get_node_chain(node, node_map)
+            slice_node_ids.update({
+                n["id"]
+                for n in node_chain
+            })
+    
+        yield {
+            "updatedAt": datetime.datetime.now().isoformat(),
+            "modelId": model["id"],
+            "version": model["version"],
+            "id": f"{model['id']}-cl-slice-{consideration_level}",
+            "label": f"Consideration Level {consideration_level.title()} Slice",
+            "nodes": [
+                {
+                    "nodeId": node_id
+                }
+                for node_id in slice_node_ids
+            ]
+        }
+
+
+def generate_essential_element_slices(model):
     nodes = model["nodes"]
     model_id = model["id"]
 
@@ -333,9 +384,8 @@ def generate_basic_slices(model):
         for node in nodes
         if node["type"] in {"kpi", "metric"}
     ]
-    
-    return [
-        {
+    for root_id, (slice_nodes, slice_ids) in slice_map.items():
+        yield {
             "updatedAt": datetime.datetime.now().isoformat(),
             "modelId": model["id"],
             "version": model["version"],
@@ -351,8 +401,6 @@ def generate_basic_slices(model):
                 ]
             ]
         }
-        for root_id, (slice_nodes, slice_ids) in slice_map.items()
-    ]
 
 
 def parse_config(path: str):
@@ -461,7 +509,10 @@ def main(argv):
     slice_output = config.get("sliceoutput")
 
     if slice_output:
-        slices = generate_basic_slices(base_model_package)
+        slices = [
+            *generate_essential_element_slices(base_model_package),
+            *generate_consideration_level_slices(base_model_package)
+        ]
         for model_slice in slices:
             slice_file_path = slice_output.format(
                 config_dir=config["config_dir"],
