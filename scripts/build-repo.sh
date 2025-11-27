@@ -2,9 +2,9 @@
 
 set -e
 
-ID="example-repo"
+ID="gorc-and-oss"
 URL_ROOT="${URL_ROOT:-https://example.com}"
-NAME="Example repo"
+NAME="GORC and OSS"
 DESCRIPTION="This is an example repo demonstrating automatic builds to github pages"
 
 mkdir -p dist/models
