@@ -21,10 +21,10 @@ class GORCParser:
         self.metric_columns = metric_columns
         self.sheets = (
             {
-                "\s*introduction\s*": None,
-                "\s*glossary\s*": None,
-                "\s*kpis & metrics\s*": "metric",
-                ".+": "node",
+                r"\s*introduction\s*": None,
+                r"\s*glossary\s*": None,
+                r"\s*kpis & metrics\s*": "metric",
+                r".+": "node",
             }
             if sheets is None
             else sheets
