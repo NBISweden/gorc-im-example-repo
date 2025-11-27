@@ -2,12 +2,12 @@
   "version": "0.1.0",
   "id": "oss-base",
   "label": "OSS Base Model",
-  "updatedAt": "2025-10-09T14:16:27.732Z",
+  "updatedAt": "2025-11-24T13:29:30.152Z",
   "nodes": [
     {
       "id": "ee1",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/compass.png",
+      "icon": "{url_root}/icons/compass.png",
       "shortName": "Governance",
       "name": "Project Governance",
       "description": "Processes and roles that define how decisions are made in the project.",
@@ -15,7 +15,7 @@
     },
     {
       "id": "cat1",
-      "parentId": "ee1",
+      "childOf": "ee1",
       "type": "category",
       "shortName": "Leadership",
       "name": "Leadership Structure",
@@ -24,7 +24,7 @@
     },
     {
       "id": "attr1",
-      "parentId": "cat1",
+      "childOf": "cat1",
       "type": "attribute",
       "shortName": "Decisions",
       "name": "Decision-Making Process",
@@ -33,7 +33,7 @@
     },
     {
       "id": "feat1",
-      "parentId": "attr1",
+      "childOf": "attr1",
       "type": "feature",
       "shortName": "Voting",
       "name": "Voting Mechanisms",
@@ -42,7 +42,7 @@
     },
     {
       "id": "feat1b",
-      "parentId": "attr1",
+      "childOf": "attr1",
       "type": "feature",
       "shortName": "Transparency",
       "name": "Decision Transparency",
@@ -51,7 +51,8 @@
     },
     {
       "id": "kpi1",
-      "parentId": "feat1",
+      "indicatorOf": ["feat1"],
+      "measurementOf": ["feat1"],
       "type": "kpi",
       "shortName": "Participation",
       "name": "Governance Participation Rate",
@@ -60,7 +61,8 @@
     },
     {
       "id": "kpi1b",
-      "parentId": "feat1",
+      "indicatorOf": ["feat1"],
+      "measurementOf": ["feat1"],
       "type": "kpi",
       "shortName": "Timeliness",
       "name": "Average Decision Time",
@@ -70,7 +72,7 @@
     {
       "id": "ee2",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/two-guys.png",
+      "icon": "{url_root}/icons/two-guys.png",
       "shortName": "Community",
       "name": "Community Engagement",
       "description": "How contributors, users, and stakeholders engage with the project.",
@@ -78,7 +80,7 @@
     },
     {
       "id": "attr2",
-      "parentId": "ee2",
+      "childOf": "ee2",
       "type": "attribute",
       "shortName": "Onboarding",
       "name": "Contributor Onboarding",
@@ -87,7 +89,7 @@
     },
     {
       "id": "feat2",
-      "parentId": "attr2",
+      "childOf": "attr2",
       "type": "feature",
       "shortName": "Guide",
       "name": "Contributor Guide",
@@ -96,7 +98,7 @@
     },
     {
       "id": "feat2b",
-      "parentId": "attr2",
+      "childOf": "attr2",
       "type": "feature",
       "shortName": "Mentorship",
       "name": "Mentorship Program",
@@ -105,7 +107,8 @@
     },
     {
       "id": "kpi2",
-      "parentId": "feat2",
+      "indicatorOf": ["feat2"],
+      "measurementOf": ["feat2"],
       "type": "kpi",
       "shortName": "Retention",
       "name": "New Contributor Retention Rate",
@@ -114,7 +117,8 @@
     },
     {
       "id": "kpi2b",
-      "parentId": "feat2",
+      "indicatorOf": ["feat2"],
+      "measurementOf": ["feat2"],
       "type": "kpi",
       "shortName": "Guide Usage",
       "name": "Contributor Guide Access Rate",
@@ -124,7 +128,7 @@
     {
       "id": "ee3",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/money-bag.png",
+      "icon": "{url_root}/icons/money-bag.png",
       "shortName": "Sustainability",
       "name": "Project Sustainability",
       "description": "Long-term viability including funding, resources, and project health.",
@@ -132,7 +136,7 @@
     },
     {
       "id": "cat2",
-      "parentId": "ee3",
+      "childOf": "ee3",
       "type": "category",
       "shortName": "Finance",
       "name": "Financial Health",
@@ -141,7 +145,7 @@
     },
     {
       "id": "subcat1",
-      "parentId": "cat2",
+      "childOf": "cat2",
       "type": "subcategory",
       "shortName": "Funding",
       "name": "Funding Sources",
@@ -150,7 +154,7 @@
     },
     {
       "id": "attr3",
-      "parentId": "subcat1",
+      "childOf": "subcat1",
       "type": "attribute",
       "shortName": "Grants",
       "name": "Dependency on Grant Funding",
@@ -159,7 +163,7 @@
     },
     {
       "id": "attr3b",
-      "parentId": "subcat1",
+      "childOf": "subcat1",
       "type": "attribute",
       "shortName": "Sponsors",
       "name": "Sponsor Engagement",
@@ -168,7 +172,8 @@
     },
     {
       "id": "kpi3",
-      "parentId": "attr3",
+      "indicatorOf": ["attr3"],
+      "measurementOf": ["attr3"],
       "type": "kpi",
       "shortName": "Funding $",
       "name": "Annual Funding Amount",
@@ -177,7 +182,8 @@
     },
     {
       "id": "kpi3b",
-      "parentId": "attr3b",
+      "indicatorOf": ["attr3b"],
+      "measurementOf": ["attr3b"],
       "type": "kpi",
       "shortName": "Sponsorship Count",
       "name": "Number of Active Sponsors",
@@ -187,7 +193,7 @@
     {
       "id": "ee4",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/chain-link.png",
+      "icon": "{url_root}/icons/chain-link.png",
       "shortName": "Interop",
       "name": "Interoperability",
       "description": "The ability of the project to integrate and function across systems.",
@@ -195,7 +201,7 @@
     },
     {
       "id": "cat3",
-      "parentId": "ee4",
+      "childOf": "ee4",
       "type": "category",
       "shortName": "Standards",
       "name": "Standards and Protocols",
@@ -204,7 +210,7 @@
     },
     {
       "id": "subcat2",
-      "parentId": "cat3",
+      "childOf": "cat3",
       "type": "subcategory",
       "shortName": "APIs",
       "name": "API Design",
@@ -213,7 +219,7 @@
     },
     {
       "id": "attr4",
-      "parentId": "subcat2",
+      "childOf": "subcat2",
       "type": "attribute",
       "shortName": "API Docs",
       "name": "API Documentation Quality",
@@ -222,7 +228,7 @@
     },
     {
       "id": "attr4b",
-      "parentId": "subcat2",
+      "childOf": "subcat2",
       "type": "attribute",
       "shortName": "Versioning",
       "name": "API Versioning Strategy",
@@ -231,7 +237,8 @@
     },
     {
       "id": "kpi4",
-      "parentId": "attr4",
+      "indicatorOf": ["attr4"],
+      "measurementOf": ["attr4"],
       "type": "kpi",
       "shortName": "API Usage",
       "name": "External API Usage Count",
@@ -240,7 +247,8 @@
     },
     {
       "id": "kpi4b",
-      "parentId": "attr4b",
+      "indicatorOf": ["attr4b"],
+      "measurementOf": ["attr4b"],
       "type": "kpi",
       "shortName": "API Breaks",
       "name": "Backward Compatibility Breaks",
@@ -250,7 +258,7 @@
     {
       "id": "ee5",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/rocket.png",
+      "icon": "{url_root}/icons/rocket.png",
       "shortName": "Adoption",
       "name": "User and Market Adoption",
       "description": "How the project is used and adopted in practice.",
@@ -258,7 +266,7 @@
     },
     {
       "id": "cat4",
-      "parentId": "ee5",
+      "childOf": "ee5",
       "type": "category",
       "shortName": "Reach",
       "name": "Community and Market Reach",
@@ -267,7 +275,7 @@
     },
     {
       "id": "subcat3",
-      "parentId": "cat4",
+      "childOf": "cat4",
       "type": "subcategory",
       "shortName": "Localization",
       "name": "Internationalization and Localization",
@@ -276,7 +284,7 @@
     },
     {
       "id": "attr5",
-      "parentId": "subcat3",
+      "childOf": "subcat3",
       "type": "attribute",
       "shortName": "Lang Support",
       "name": "Language Support Breadth",
@@ -285,7 +293,7 @@
     },
     {
       "id": "attr5b",
-      "parentId": "subcat3",
+      "childOf": "subcat3",
       "type": "attribute",
       "shortName": "Docs i18n",
       "name": "Translated Documentation Availability",
@@ -294,7 +302,8 @@
     },
     {
       "id": "kpi5",
-      "parentId": "attr5",
+      "indicatorOf": ["attr5"],
+      "measurementOf": ["attr5"],
       "type": "kpi",
       "shortName": "Locales",
       "name": "Number of Supported Locales",
@@ -303,7 +312,8 @@
     },
     {
       "id": "kpi5b",
-      "parentId": "attr5b",
+      "indicatorOf": ["attr5b"],
+      "measurementOf": ["attr5b"],
       "type": "kpi",
       "shortName": "Docs Translated",
       "name": "Percentage of Docs Translated",

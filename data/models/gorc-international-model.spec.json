@@ -1,0 +1,45 @@
+{
+    "type": "excel",
+    "path": "{config_dir}/data/GORC_International_Model_WG-CommonsModelV1.1.xlsx",
+    "id": "gorc-im-core",
+    "label": "GORC Base Model",
+    "version": "1.1.0b",
+    "output": "{config_dir}/../../dist/models/{id}.json",
+    "sliceoutput": "{config_dir}/../../dist/slices/{slice_id}.json",
+    "id_mapping": {
+        "ict": "ict-infrastructure",
+        "governance-management": "governance-leadership"
+    },
+    "extensions": {
+        "governance-leadership": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_governance-and-leadership.svg"
+        },
+        "rules-of-participation-access": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_rules-of-participation-access.svg"
+        },
+        "sustainability": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_sustainability.svg"
+        },
+        "engagement": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_engagement.svg"
+        },
+        "human-capacity": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_human-capacity.svg"
+        },
+        "interoperability": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_interoperability.svg"
+        },
+        "standards-conventions": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_standards-conventions.svg"
+        },
+        "ict-infrastructure": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_ict-infrastructure.svg"
+        },
+        "services-tools": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_services-tools.svg"
+        },
+        "research-objects": {
+            "icon": "{url_root}/icons/gorc/gorc-icon_research-objects.svg"
+        }
+    }
+}

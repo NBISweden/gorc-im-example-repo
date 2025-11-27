@@ -3,12 +3,12 @@
   "label": "OSS Dual-License Model",
   "version": "0.1.0",
   "modelId": "oss-base",
-  "updatedAt": "2025-10-09T14:16:27.732Z",
+  "updatedAt": "2025-11-24T13:29:30.153Z",
   "nodes": [
     {
       "id": "ee1",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/compass.png",
+      "icon": "{url_root}/icons/compass.png",
       "shortName": "Governance",
       "name": "Project Governance (Dual-License)",
       "description": "Decision-making and oversight for both open and enterprise editions, ensuring license boundary integrity.",
@@ -16,7 +16,7 @@
     },
     {
       "id": "cat1",
-      "parentId": "ee1",
+      "childOf": "ee1",
       "type": "category",
       "shortName": "Oversight",
       "name": "Governance and Licensing Oversight",
@@ -25,7 +25,7 @@
     },
     {
       "id": "attr1",
-      "parentId": "cat1",
+      "childOf": "cat1",
       "type": "attribute",
       "shortName": "License Policy",
       "name": "License Governance Policy",
@@ -34,7 +34,7 @@
     },
     {
       "id": "feat1",
-      "parentId": "attr1",
+      "childOf": "attr1",
       "type": "feature",
       "shortName": "License Map",
       "name": "License Mapping System",
@@ -43,7 +43,8 @@
     },
     {
       "id": "kpi-lic1",
-      "parentId": "feat1",
+      "indicatorOf": ["feat1"],
+      "measurementOf": ["feat1"],
       "type": "kpi",
       "shortName": "Compliance Coverage",
       "name": "License Compliance Coverage",
@@ -52,7 +53,8 @@
     },
     {
       "id": "kpi-lic2",
-      "parentId": "feat1",
+      "indicatorOf": ["feat1"],
+      "measurementOf": ["feat1"],
       "type": "kpi",
       "shortName": "Violation Rate",
       "name": "License Violation Incidents",
@@ -70,7 +72,7 @@
     {
       "id": "ee2",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/two-guys.png",
+      "icon": "{url_root}/icons/two-guys.png",
       "shortName": "Community",
       "name": "Community Engagement (Dual-License)",
       "description": "How community contributors interact under dual-license conditions, ensuring clarity and inclusiveness.",
@@ -78,7 +80,7 @@
     },
     {
       "id": "attr2",
-      "parentId": "ee2",
+      "childOf": "ee2",
       "type": "attribute",
       "shortName": "Transparency",
       "name": "Transparency of Licensing Boundaries",
@@ -87,7 +89,7 @@
     },
     {
       "id": "feat2",
-      "parentId": "attr2",
+      "childOf": "attr2",
       "type": "feature",
       "shortName": "Disclosure",
       "name": "Public License Disclosure",
@@ -96,7 +98,8 @@
     },
     {
       "id": "kpi2",
-      "parentId": "feat2",
+      "indicatorOf": ["feat2"],
+      "measurementOf": ["feat2"],
       "type": "kpi",
       "shortName": "Transparency Index",
       "name": "License Transparency Index",
@@ -118,7 +121,7 @@
     {
       "id": "ee3",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/money-bag.png",
+      "icon": "{url_root}/icons/money-bag.png",
       "shortName": "Sustainability",
       "name": "Project Sustainability (Dual-License)",
       "description": "Ensuring long-term viability through a balanced open-source and enterprise revenue model.",
@@ -126,7 +129,7 @@
     },
     {
       "id": "cat2",
-      "parentId": "ee3",
+      "childOf": "ee3",
       "type": "category",
       "shortName": "Monetization",
       "name": "Monetization Strategy",
@@ -135,7 +138,7 @@
     },
     {
       "id": "attr3",
-      "parentId": "cat2",
+      "childOf": "cat2",
       "type": "attribute",
       "shortName": "Revenue Mix",
       "name": "Revenue Composition",
@@ -144,7 +147,7 @@
     },
     {
       "id": "feat3",
-      "parentId": "attr3",
+      "childOf": "attr3",
       "type": "feature",
       "shortName": "Dual Streams",
       "name": "Dual Revenue Streams",
@@ -153,7 +156,8 @@
     },
     {
       "id": "kpi3",
-      "parentId": "feat3",
+      "indicatorOf": ["feat3"],
+      "measurementOf": ["feat3"],
       "type": "kpi",
       "shortName": "Open/Enterprise Ratio",
       "name": "Open vs Enterprise Revenue Ratio",
@@ -175,7 +179,7 @@
     {
       "id": "ee4",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/chain-link.png",
+      "icon": "{url_root}/icons/chain-link.png",
       "shortName": "Interop",
       "name": "Interoperability (Dual-License)",
       "description": "Ensures that open and enterprise editions interoperate cleanly and respect open API commitments.",
@@ -183,7 +187,7 @@
     },
     {
       "id": "cat3",
-      "parentId": "ee4",
+      "childOf": "ee4",
       "type": "category",
       "shortName": "Interfaces",
       "name": "Open Integration Interfaces",
@@ -192,7 +196,7 @@
     },
     {
       "id": "attr4",
-      "parentId": "cat3",
+      "childOf": "cat3",
       "type": "attribute",
       "shortName": "API Openness",
       "name": "Public API Commitment",
@@ -201,7 +205,8 @@
     },
     {
       "id": "kpi4",
-      "parentId": "attr4",
+      "indicatorOf": ["attr4"],
+      "measurementOf": ["attr4"],
       "type": "kpi",
       "shortName": "API Openness",
       "name": "Public API Ratio",
@@ -219,7 +224,7 @@
     {
       "id": "ee5",
       "type": "essential-element",
-      "icon": "https://raw.githubusercontent.com/pdmnyberg/gorc-example-repo/refs/heads/main/gorc-and-oss/icons/rocket.png",
+      "icon": "{url_root}/icons/rocket.png",
       "shortName": "Adoption",
       "name": "Adoption and Market Reach (Dual-License)",
       "description": "Tracks uptake of both open and enterprise variants to inform business and community health.",
@@ -227,7 +232,7 @@
     },
     {
       "id": "cat4",
-      "parentId": "ee5",
+      "childOf": "ee5",
       "type": "category",
       "shortName": "Usage Segments",
       "name": "Usage Segmentation",
@@ -236,7 +241,7 @@
     },
     {
       "id": "attr5",
-      "parentId": "cat4",
+      "childOf": "cat4",
       "type": "attribute",
       "shortName": "Adoption Mix",
       "name": "Adoption Composition",
@@ -245,7 +250,8 @@
     },
     {
       "id": "kpi5",
-      "parentId": "attr5",
+      "indicatorOf": ["attr5"],
+      "measurementOf": ["attr5"],
       "type": "kpi",
       "shortName": "Adoption Split",
       "name": "Community vs Enterprise Adoption Ratio",

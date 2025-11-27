@@ -1,0 +1,4 @@
+converter/*.xlsx
+converter/*.json
+dist
+.venv
