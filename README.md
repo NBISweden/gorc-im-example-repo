@@ -100,3 +100,7 @@ In this example the properties can be described as follows:
 The content of the `data/json` folder is copied to the output `model repository`. It is structured as a good example of a `model repository` could be without including a `root.json` file since the `root.json` is expected to be created using `converter/create_repo.py`.
 
 A detailed specification of what a `model repository` consists of can be found in the documentation for [RDA GORC IM Visualization Tool](https://github.com/NBISweden/rda-gorc-im).
+
+## Acknowledgments
+
+This project is a part of [RDA GORC IM Visualization Tool](https://github.com/NBISweden/rda-gorc-im) and has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement No 101094406
